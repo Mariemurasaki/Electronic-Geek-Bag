@@ -15,6 +15,11 @@
     - Battery consumtion optimisation, as far as this is possible on a Gemma               
     - Some stuff is easily configurable (see "User Settings" below)
 
+
+   NOTE:
+   Please use the "Adafruit Neopixel" library version  1.0.2  for this sketch.
+   The newer ones are slightly bigger and memory is already tight.
+
    ----------------------------------------------------------------------------------------
    
     The MIT License (MIT)
@@ -48,6 +53,12 @@
 #include <avr/sleep.h>
 
 
+// check whether we have the correct verion of the Neopixel Library
+#ifdef NEO_BWRG
+  #error "ERROR: This version of the 'Adafruit Neopixel' library is too new to use. Please use version 1.0.2. Newer versions are too big to fit into the sketch"
+#endif
+
+
 // *****************************************************
 // ********** Hardware specific settings ***************
 // *****************************************************
@@ -67,9 +78,9 @@ Adafruit_NeoPixel neoEyes = Adafruit_NeoPixel(2, LED_PIN_DIGITAL, NEO_GRB + NEO_
 const uint32_t BASE_EYE_COLOR = neoEyes.Color(0, 255, 40);   // the eye-color of the cat.
                                                              // "uint32_t" is the same as "unsigned long", i just want to emphasise that this is actually 32-bit, containing a color (3x8 byte RGB)
                                                              
-const byte GLOBAL_BRIGHTNESS = 60;                           // additional brightness value, to dimm the eyes if they are too bright
+const byte GLOBAL_BRIGHTNESS = 60;                           // additional brightness value, to dimm the eyes if they are too bright (value beteen 0 and 255)
                                                              // setting it 0 disabled the behaviour (freeing up about 0.1 kB)
-                                                             // 60% brightness with one color usually consumes ~13mA when ON. (the idle-consumption is about 6mA)
+                                                             // a brightness 60 with one color usually consumes ~13mA when ON. (the idle-consumption is about 6mA)
 
 const unsigned long RANDOM_ACTION_INTERVAL_MIN = 8000;       // minimum time between animations like blink
 const unsigned long RANDOM_ACTION_INTERVAL_MAX = 15000;      // maximum time between animations like blink
