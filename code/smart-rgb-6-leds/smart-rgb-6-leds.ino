@@ -11,11 +11,11 @@
 const int LED_PIN_DIGITAL = 1;                    // 1 = D1
 const int LIGHT_SENSOR_PIN_NUMBER_DIGITAL = 2;    // 2 = D2
 const int LIGHT_SENSOR_PIN_NUMBER_ANALOG = 1;     // 1 = A1  (WTF? who came up with this numbering ?!?+)
-const int EYE_NUM_1 = 4;                          //Value ob the position of the EYE_LEDS in the LED-Array
+const int EYE_NUM_1 = 4;                          //Value of the position of the EYE_LEDS in the LED-Array
 const int EYE_NUM_2 = 5;
-const int FOOT_NUM_1 = 0;                          //Value ob the position of the EYE_LEDS in the LED-Array
+const int FOOT_NUM_1 = 0;                          //Value of the position of the EYE_LEDS in the LED-Array
 const int FOOT_NUM_2 = 1;
-const int FOOT_NUM_3 = 2;                          //Value ob the position of the FOOT_LEDS in the LED-Array
+const int FOOT_NUM_3 = 2;                          
 const int FOOT_NUM_4 = 3;
 const int NUM_LEDS = 6;
 
@@ -97,7 +97,6 @@ void loop()
     else if (areEyesOn)
     {
         // if lights are just ON, we'll check whether we should run some random action (blinkin, winking, etc.)
-        checkForRadomAction();
         playAFootChange();
 
         // just like normal delay() but we enter IDLE mode to save (a bit of battery)
