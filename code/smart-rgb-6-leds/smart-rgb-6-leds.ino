@@ -59,6 +59,10 @@ void setup() {
 
 }
 
+// ******************************************
+// ********** Main Arduino methods **********
+// ******************************************
+
 void loop()
 {
     // we read the light values
@@ -76,6 +80,7 @@ void loop()
         areEyesOn = true;
 
         // we also have to reset the time for the next random action, otherise this will happen immediately
+        timeForNextAction = millis() + random(RANDOM_ACTION_INTERVAL_MIN, RANDOM_ACTION_INTERVAL_MAX);
         delay(50);
     }
     else if (areEyesOn && currentLightValue > UPPER_LIGHT_VALUE)
@@ -92,7 +97,8 @@ void loop()
     else if (areEyesOn)
     {
         // if lights are just ON, we'll check whether we should run some random action (blinkin, winking, etc.)
-       playAFootChange();
+        checkForRadomAction();
+        playAFootChange();
 
         // just like normal delay() but we enter IDLE mode to save (a bit of battery)
         // this saves about 3mA
@@ -221,3 +227,10 @@ void playAFootChange()
     }
     FastLED.show();
 }
+
+// ***************************************************
+// ********** Methods focused on scheduling **********
+// ***************************************************
+
+
+
